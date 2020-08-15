@@ -6,15 +6,22 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "lodash": "^4.17.20",
+    "protobufjs": "^6.10.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "tailwindcss": "^1.6.2"
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "readme": "npx showdown makehtml -i README.MD -o README.html"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -23,6 +30,7 @@
     "production": [
       ">0.2%",
       "not dead",
+      "not ie <= 11",
       "not op_mini all"
     ],
     "development": [
