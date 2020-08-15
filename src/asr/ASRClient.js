@@ -7,9 +7,7 @@ import {
   map,
 } from 'lodash'
 import * as protobuf from 'protobufjs'
-import * as path from 'path'
-
-const vibeProto = path.resolve(__dirname, './vibe-schema.proto')
+import vibeProto from './vibe-schema.proto'
 
 const ERROR_CODES = {
   SocketError: 1001,
