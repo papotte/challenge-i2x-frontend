@@ -1,42 +1,37 @@
 import StartStopButton from './StartStopButton'
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import ChatBox from './ChatBox'
+import KeywordsInput from './KeywordsInput'
 import Log from './Log'
-import {ASRClient} from '../asr/ASRClient'
-import {compact} from 'lodash'
 
-const ASRInstance = new ASRClient('wss://vibe-rc.i2x.ai')
-const onMessageChange = (phrases) => {
-  if (ASRInstance.isStarted()) {
-    ASRInstance.updateSpottingConfig(compact(phrases))
+export default class Main extends Component {
+  static propTypes = {
+    started: PropTypes.bool.isRequired,
+    phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
+    log: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired,
   }
-}
-const Main = ({started, phrases, log, actions}) => (
-    <div>
-      <StartStopButton started={started} start={() => {
-        actions.start()
-        ASRInstance.start(compact(phrases), (error, results) => {
-          actions.addLog(results)
-        })
-      }} stop={() => {
-        ASRInstance.stop()
-        actions.stop()
-      }}/>
-      <ChatBox phrases={phrases} onChange={(value) => {
-        const nextPhrases = value.split('\n')
-        actions.changePhrases(nextPhrases)
-        onMessageChange(nextPhrases)
-      }}/>
+
+  receivedMessage(addLog, addMessage, results) {
+    addLog(results)
+    addMessage(results)
+  }
+
+  render() {
+    const {started, log, phrases, actions} = this.props
+    const {addLog, addMessage} = actions
+    return <div>
+      <StartStopButton started={started}
+                       start={() => {
+                         actions.start((results) => {
+                           this.receivedMessage(addLog, addMessage, results)
+                         })
+                       }}
+                       stop={actions.stop}/>
+      <KeywordsInput phrases={phrases}
+                     onChange={actions.changePhrases}/>
       <Log log={log}/>
     </div>
-)
+  }
 
-Main.propTypes = {
-  started: PropTypes.bool.isRequired,
-  phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
-  log: PropTypes.string.isRequired,
-  actions: PropTypes.object.isRequired,
 }
-
-export default Main

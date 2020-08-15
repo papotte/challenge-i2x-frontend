@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 
-export default class ChatBox extends Component {
+export default class KeywordsInput extends Component {
   static propTypes = {
     phrases: PropTypes.arrayOf(PropTypes.string),
     onChange: PropTypes.func.isRequired,

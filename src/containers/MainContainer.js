@@ -7,6 +7,7 @@ const mapStateToProps = state => ({
   started: state.asr.started,
   phrases: state.asr.phrases,
   log: state.asr.log,
+  messages: state.asr.messages,
 })
 
 const mapDispatchToProps = dispatch => ({

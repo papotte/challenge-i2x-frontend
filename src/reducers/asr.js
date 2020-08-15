@@ -1,14 +1,22 @@
-import {ADD_LOG, CHANGE_PHRASES, START, STOP} from '../constants/ActionTypes'
+import {ADD_LOG, ADD_MESSAGE, CHANGE_PHRASES, START, STOP} from '../constants/ActionTypes'
+import {ASRClient} from '../asr/ASRClient'
+import {compact} from 'lodash'
 
 const initialState = {
   started: false,
   phrases: ['product', 'Hi', 'Hello', 'My name is'],
   log: '',
+  messages: [],
+  ASRInstance: new ASRClient('wss://vibe-rc.i2x.ai'),
 }
 
 export default function asr(state = initialState, action) {
   switch (action.type) {
     case START:
+      const onMessage = action.onMessage
+      state.ASRInstance.start(compact(state.phrases), (error, results) => {
+        onMessage(results)
+      })
       return {
         ...state,
         started: true,
@@ -16,6 +24,7 @@ export default function asr(state = initialState, action) {
       }
 
     case STOP:
+      state.ASRInstance.stop()
       return {
         ...state,
         started: false,
@@ -23,9 +32,14 @@ export default function asr(state = initialState, action) {
       }
 
     case CHANGE_PHRASES:
+      const nextPhrases = action.value.split('\n')
+      if (state.ASRInstance.isStarted()) {
+        state.ASRInstance.updateSpottingConfig(compact(nextPhrases))
+      }
+      state.phrases = nextPhrases
       return {
         ...state,
-        phrases: action.value,
+        phrases: nextPhrases,
         ASRInstance: state.ASRInstance,
       }
 
@@ -34,6 +48,20 @@ export default function asr(state = initialState, action) {
         ...state,
         log: state.log + '\n' + JSON.stringify(action.result, null, 2),
       }
+
+    case ADD_MESSAGE:
+      if (action.message) {
+        const newMessage = action.message
+
+        return {
+          ...state,
+          messages: [
+            ...state.messages,
+            newMessage,
+          ],
+        }
+      }
+      return state
 
     default:
       return state
