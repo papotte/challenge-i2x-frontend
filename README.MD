@@ -31,8 +31,25 @@ Additionally, I have included TailwindCSS as a dependency to use known CSS patte
 ### Running it:
  - run `npm install`
  - run `npm start`
- - go to `localhost:3000`
+ - navigate to `localhost:3000`
  
-### Testing it 
+### Testing it:
  Assuming you've installed dependencies (see above)
  - run `npm run test`
+
+### Run on Docker:
+There are two Dockerfiles that can be used: Slim and normal.
+The difference is, the Slim one uses your local build to save time. However, this would not work in a CI/CD pipeline, so it's only for testing purposes. 
+
+#### Slim
+- edit `.dockerignore` and remove the line with `build` on it
+- run `npm run build`
+- run `docker build . -f slim.Dockerfile -t i2x-slim-docker`
+- run `docker run -p 8000:80 i2x-slim-docker`
+- navigate to `localhost:8080`
+
+### Full
+- make sure that `build` is on the `.dockerignore` file.
+- run `docker build . -t i2x-docker`
+- run `docker run -p 8000:80 i2x-docker`
+- navigate to `localhost:8080`
