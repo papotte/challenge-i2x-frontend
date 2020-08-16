@@ -1,6 +1,6 @@
 import Message from './Message'
 
-describe('message', () => {
+describe('Message', () => {
   describe('makeKeywordsBold', () => {
     it('should highlight hello', () => {
       const string = 'Hello, my name is Rupert.'
