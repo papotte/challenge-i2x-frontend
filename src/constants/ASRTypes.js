@@ -11,3 +11,7 @@ export const MessageType = PropTypes.shape({
   transcript: TranscriptType,
 })
 
+export const MessageSummaryType = PropTypes.shape({
+  spotted: PropTypes.arrayOf(PropTypes.string).isRequired,
+  transcript: PropTypes.string.isRequired,
+})

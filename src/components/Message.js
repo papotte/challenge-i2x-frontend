@@ -1,30 +1,31 @@
 import React, {Component} from 'react'
-import {MessageType} from '../constants/ASRTypes'
-
-export function makeKeywordsBold(string, keywords) {
-  let text = string
-  keywords.forEach((w) => {
-    text = text.replace(w, `<b>${w}</b>`)
-  })
-
-  return text
-}
+import {MessageSummaryType} from '../constants/ASRTypes'
+import PropTypes from 'prop-types'
 
 export default class Message extends Component {
   static propTypes = {
-    message: MessageType.isRequired,
+    messages: PropTypes.arrayOf(MessageSummaryType.isRequired).isRequired,
+  }
+
+  static makeKeywordsBold(string, keywords) {
+    let text = string
+    keywords.forEach((w) => {
+      text = text.replace(w, `<b>${w}</b>`)
+    })
+
+    return text
   }
 
   render() {
-    const {spotted, transcript} = this.props.message
-
-    const highlightedText = makeKeywordsBold(transcript.utterance, spotted)
+    const {messages} = this.props
 
     return (
-        <li className={'px-5 py-3 bg-blue-500 text-white rounded-full shadow-xl inline'}>
-          <label dangerouslySetInnerHTML={{__html: highlightedText}}>
-          </label>
-        </li>
+        <div className={'px-5 py-3 bg-blue-500 text-white rounded-lg shadow-xl inline-block'}>
+          {messages.map(({transcript, spotted}, index) => {
+            const highlightedText = Message.makeKeywordsBold(transcript, spotted)
+            return <p key={index} dangerouslySetInnerHTML={{__html: highlightedText}}/>
+          })}
+        </div>
     )
   }
 }
