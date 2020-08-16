@@ -3,27 +3,30 @@ import {createRenderer} from 'react-test-renderer/shallow'
 import App from './App'
 import MainContainer from './containers/FooterContainer'
 import ChatContainer from './containers/ChatContainer'
+import HeaderContainer from './containers/HeaderContainer'
+import FooterContainer from './containers/FooterContainer'
 
 const setup = _propOverrides => {
   const renderer = createRenderer()
-  renderer.render(<App />)
-  return renderer.getRenderOutput()
+  renderer.render(<App/>)
+  let renderOutput = renderer.getRenderOutput()
+  return renderOutput.props.children
 }
 
 describe('components', () => {
-  describe('MainContainer', () => {
+  describe('Header', () => {
     it('should render', () => {
       const output = setup()
-      const [main] = output.props.children
-      expect(main.type).toBe(MainContainer)
+      const [header] = output.props.children
+      expect(header.type).toBe(HeaderContainer)
     })
   })
 
-  describe('ChatContainer', () => {
+  describe('Footer', () => {
     it('should render', () => {
       const output = setup()
-      const [, chat] = output.props.children
-      expect(chat.type).toBe(ChatContainer)
+      const [, , footer] = output.props.children
+      expect(footer.type).toBe(FooterContainer)
     })
   })
 })
