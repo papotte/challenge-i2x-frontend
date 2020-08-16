@@ -1,12 +1,16 @@
 import React, {Fragment} from 'react'
-import MainContainer from './containers/MainContainer'
+import FooterContainer from './containers/FooterContainer'
 import ChatContainer from './containers/ChatContainer'
+import ToolbarContainer from './containers/ToolbarContainer'
+import HeaderContainer from './containers/HeaderContainer'
 
 export function App() {
   return (
       <Fragment>
-        <MainContainer/>
+        <HeaderContainer/>
+        <ToolbarContainer/>
         <ChatContainer/>
+        <FooterContainer/>
       </Fragment>
   )
 }

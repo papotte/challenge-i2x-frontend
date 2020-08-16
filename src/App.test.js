@@ -1,7 +1,7 @@
 import React from 'react'
 import {createRenderer} from 'react-test-renderer/shallow'
 import App from './App'
-import MainContainer from './containers/MainContainer'
+import MainContainer from './containers/FooterContainer'
 import ChatContainer from './containers/ChatContainer'
 
 const setup = _propOverrides => {

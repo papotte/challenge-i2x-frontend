@@ -1,10 +1,9 @@
 import {connect} from 'react-redux'
 import * as ASRActions from '../actions'
 import {bindActionCreators} from 'redux'
-import Main from '../components/Main'
+import Toolbar from '../components/Toolbar'
 
 const mapStateToProps = state => ({
-  started: state.asr.started,
   phrases: state.asr.phrases,
 })
 
@@ -15,5 +14,5 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps,
-)(Main)
+)(Toolbar)
 
