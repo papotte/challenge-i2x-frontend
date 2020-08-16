@@ -13,18 +13,19 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "react-scripts": "3.4.3",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
     "tailwindcss": "^1.6.2"
   },
   "devDependencies": {
+    "react-scripts": "^3.4.3",
+    "react-test-renderer": "^16.13.1",
     "typescript": "^3.9.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=node",
     "eject": "react-scripts eject",
     "readme": "npx showdown makehtml -i README.MD -o README.html"
   },

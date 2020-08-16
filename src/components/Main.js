@@ -2,13 +2,11 @@ import StartStopButton from './StartStopButton'
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import KeywordsInput from './KeywordsInput'
-import Log from './Log'
 
 export default class Main extends Component {
   static propTypes = {
     started: PropTypes.bool.isRequired,
     phrases: PropTypes.arrayOf(PropTypes.string).isRequired,
-    log: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired,
   }
 
@@ -18,7 +16,7 @@ export default class Main extends Component {
   }
 
   render() {
-    const {started, log, phrases, actions} = this.props
+    const {started, phrases, actions} = this.props
     const {addLog, addMessage} = actions
     return <div>
       <StartStopButton started={started}
@@ -30,7 +28,6 @@ export default class Main extends Component {
                        stop={actions.stop}/>
       <KeywordsInput phrases={phrases}
                      onChange={actions.changePhrases}/>
-      <Log log={log}/>
     </div>
   }
 

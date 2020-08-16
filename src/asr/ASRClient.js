@@ -9,6 +9,8 @@ import {
 import * as protobuf from 'protobufjs'
 import vibeProto from './vibe-schema.proto'
 
+export const getVibeProto = () => vibeProto
+
 const ERROR_CODES = {
   SocketError: 1001,
   NavigatorError: 2002,
@@ -359,7 +361,7 @@ class ASRClient {
   }
 
   _loadProto() {
-    protobuf.load(vibeProto, (error, root) => {
+    protobuf.load(getVibeProto(), (error, root) => {
       if (error) {
         return this._handleLoadError(error)
       }
