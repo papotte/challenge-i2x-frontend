@@ -9,7 +9,7 @@ export default class Header extends Component {
   render() {
     const {started} = this.props
     return <div className={'toolbar p-2 text-2xl'}>
-      Status: <b>Session {started ? 'started' : 'stopped'}</b>
+      Status: <b>{started ? 'Session started' : 'Disconnected'}</b>
     </div>
   }
 

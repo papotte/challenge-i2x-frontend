@@ -16,12 +16,14 @@ export default class Chat extends Component {
     console.log(messages)
     return <div>
       <div className={'text-lg mb-4'}>Transcript</div>
-      <ul className={'border-2 p-6 bg-blue-100 border-blue-800 rounded-md shadow-xl overflow-y-auto'}
-          style={{height: '60vh'}}>
-        {messages.map((message, index) =>
-            <Message key={index} message={message}/>,
-        )}
-      </ul>
+      <div className={'border-2 p-6 bg-blue-100 border-blue-800 rounded-md shadow-xl overflow-y-auto grid grid-cols-1'}
+           style={{height: '60vh'}}>
+        <ul>
+          {messages.map((message, index) =>
+              <Message key={index} message={message}/>,
+          )}
+        </ul>
+      </div>
       <Log log={log}/>
     </div>
   }

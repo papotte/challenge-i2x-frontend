@@ -6,7 +6,16 @@ const initialState = {
   started: false,
   phrases: ['product', 'Hi', 'Hello', 'My name is'],
   log: '',
-  messages: [],
+  messages: [
+    {
+      spotted: ['product', 'hello', 'my name is'],
+      transcript: {
+        endOffsetMsec: 6090,
+        startOffsetMsec: 630,
+        utterance: 'Hello, my name is one I would like to buy a product.',
+      },
+    },
+  ],
   ASRInstance: new ASRClient('wss://vibe-rc.i2x.ai'),
 }
 
