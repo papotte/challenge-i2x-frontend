@@ -8,8 +8,8 @@ export default class Header extends Component {
 
   render() {
     const {started} = this.props
-    return <div>
-      status: <b>session {started ? 'started' : 'stopped'}</b>
+    return <div className={'toolbar p-2 text-2xl'}>
+      Status: <b>Session {started ? 'started' : 'stopped'}</b>
     </div>
   }
 
